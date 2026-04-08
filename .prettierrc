@@ -1,0 +1,26 @@
+{
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@yikes2000/prettier-plugin-merge-extras"
+  ],
+  "printWidth": 180,
+  "jsxSingleQuote": false,
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "useTabs": false,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "quoteProps": "as-needed",
+  "htmlWhitespaceSensitivity": "css",
+  "proseWrap": "preserve",
+  "alignObjectProperties": "none",
+  "alignSingleProperty": false,
+  "mergeSimpleImports": false,
+  "preserveEolMarker": false,
+  "preserveFirstBlankLine": true,
+  "preserveLastBlankLine": true,
+  "returnParentheses": true
+}

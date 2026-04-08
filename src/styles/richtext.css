@@ -1,0 +1,126 @@
+/* richtext */
+
+@utility richtext {
+    --color-blockquote-icon: var(--color-lime);
+    --color-blockquote-secondary: var(--color-accent);
+
+    @apply space-y-24 fp-text-body;
+
+    & :is(h1, h2, h3, h4, h5, h6) strong {
+        @apply font-normal;
+    }
+
+    & :is(h1, h2, h3, h4, h5, h6) {
+        @apply uppercase mt-40 mb-16 md:mt-80 md:mb-40 tracking-normal;
+    }
+
+    & :is(h4, h5, h6) {
+        @apply md:mb-24
+    }
+
+    & h1 {
+        @apply h1;
+    }
+
+    & h2 {
+        @apply h2;
+    }
+
+    & h3 {
+        @apply h3;
+    }
+
+    & h4 {
+        @apply h4;
+    }
+
+    & h5 {
+        @apply h5;
+    }
+
+    & h6 {
+        @apply h6;
+    }
+
+    & :is(ul, ol) {
+        list-style: revert;
+        padding-left: 1.5em;
+
+        & > li > ol {
+            list-style: lower-alpha;
+        }
+    }
+
+    & ul {
+        @apply my-16 md:my-24 p-0 space-y-16 md:space-y-24;
+
+        & li {
+            @apply list-none relative pl-30 md:pl-42 before:content-[''] before:absolute before:left-0 before:top-0 before:w-30 before:h-30 before:bg-[url(/li-marker.svg)] before:bg-contain before:bg-no-repeat;
+        }
+    }
+
+    & a:not(:is(.action, .action-outline, .ghost)) {
+        @apply link;
+    }
+
+    & :not(pre) > code {
+        @apply bg-ink/10 rounded px-1;
+    }
+
+    & pre {
+        tab-size: 2;
+        @apply overflow-x-auto rounded bg-transparent p-3 text-xs/relaxed;
+    }
+
+    & blockquote {
+        @apply border-accent border-l-4 pl-16 text-20 font-bold leading-[1.4] text-accent my-20 md:my-40 md:text-22 md:-tracking-1 md:leading-[1.5] md:pl-36;
+    }
+
+    & table {
+        display: block;
+        overflow-x: auto;
+        text-wrap: balance;
+        line-height: initial;
+
+        @apply max-md:full-bleed min-w-full;
+
+        & th,
+        td {
+            @apply p-3 text-center;
+        }
+
+        & tbody {
+            & tr:nth-child(odd) {
+                @apply bg-accent/3;
+            }
+
+            & tr th:first-child {
+                text-align: left;
+            }
+        }
+    }
+
+    & video {
+        width: 100%;
+    }
+
+    & > :first-child {
+        @apply !mt-0;
+    }
+
+    & > :last-child {
+        @apply !mb-0;
+    }
+}
+
+@utility richtext-dark {
+    --color-accent: var(--color-blue-eyes);
+    --color-blockquote-icon: var(--color-white);
+    --color-blockquote-secondary: var(--color-white);
+
+    & ul {
+        & li {
+            @apply before:bg-[url(/li-marker-blue.svg)];
+        }
+    }
+}
