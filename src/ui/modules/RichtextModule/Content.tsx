@@ -15,6 +15,7 @@ import OrganisationInfo from '@/ui/modules/RichtextModule/OrganisationInfo'
 import EmailCta from '@/ui/modules/RichtextModule/EmailCta'
 import People from '@/ui/modules/RichtextModule/People'
 import YouTube from '@/ui/modules/RichtextModule/YouTube'
+import TwoColImage from '@/ui/modules/RichtextModule/TwoColImage'
 
 export default function Content({ value, className, children }: { value: Any } & React.ComponentProps<'div'>) {
   return (
@@ -27,6 +28,7 @@ export default function Content({ value, className, children }: { value: Any } &
           },
           types: {
             image: Image,
+            twoColImage: TwoColImage,
             admonition: Admonition,
             highlightedList: HighlightedList,
             blockquote: Blockquote,

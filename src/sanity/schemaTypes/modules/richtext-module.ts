@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { VscSymbolKeyword } from 'react-icons/vsc'
-import { imageBlock, highlightedList, blockquote } from '../fragments'
+import { imageBlock, highlightedList, blockquote, twoColImage } from '../fragments'
 import { getBlockText } from 'sanitypress-utils'
 
 export default defineType({
@@ -25,6 +25,7 @@ export default defineType({
       of: [
         { type: 'block' },
         imageBlock,
+        twoColImage,
         highlightedList,
         blockquote,
         { type: 'inflow' },
