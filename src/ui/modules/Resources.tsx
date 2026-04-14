@@ -33,7 +33,7 @@ const ResourceSection: React.FC<{ section: ResourceSection; link?: Sanity.Link }
               key={item._key}
               className="bg-accent relative flex h-232 w-174 shrink-0 flex-col items-center justify-between bg-[url(/assets/book-cover.jpg)] bg-cover px-15 pt-30 pb-20 text-center text-white lg:w-auto"
             >
-              {item.title && <h4 className="text-16 -tracking-1 leading-[1.5] font-bold wrap-anywhere underline">{item.title}</h4>}
+              {item.title && <h4 className="text-16 -tracking-1 leading-[1.5] font-bold wrap-anywhere underline line-clamp-5">{item.title}</h4>}
               {item.version && <span className="text-14 -tracking-1 leading-[1.5]">{item.version}</span>}
 
               {item?.file?.url && (

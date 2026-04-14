@@ -123,7 +123,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             innerText: 0,
           },
           {
-            innerText: 87,
+            innerText: 95,
             duration: 1,
             ease: 'power3.inOut',
             snap: { innerText: 1 },
@@ -154,7 +154,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             innerText: 0,
           },
           {
-            innerText: 26,
+            innerText: 27,
             duration: 1,
             ease: 'power3.inOut',
             snap: { innerText: 1 },
@@ -275,7 +275,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
           <div className="relative flex flex-col gap-20 md:flex-1 md:gap-64 md:pr-20 xl:pr-80">
             <div className="flex flex-col gap-16 md:gap-20">
               <div data-countries-num className="text-accent fp-text-hero">
-                87
+                95
               </div>
               <p data-countries-label className="text-accent h3">
                 Countries
@@ -285,14 +285,14 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             <p data-countries-label className="h4 whitespace-pre-wrap">
               Certified Entities are located
               <br />
-              in 87 countries.
+              in 95 countries.
             </p>
           </div>
           {/* col 2*/}
           <div className="relative flex flex-col gap-20 md:flex-1 md:gap-64 md:self-end md:pl-20 xl:pl-80">
             <div className="flex flex-col gap-16 md:gap-20">
               <div data-bodies-num className="text-accent fp-text-hero">
-                26
+                27
               </div>
               <p data-bodies-label className="text-accent h3">
                 GOTS Certification Bodies
@@ -300,7 +300,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             </div>
             <div data-bodies-label className="bg-bright-gray h-1 w-full"></div>
             <p data-bodies-label className="h4 whitespace-pre-wrap">
-              26 approved Certification Bodies are active globally.
+              27 approved Certification Bodies are active globally.
             </p>
           </div>
         </div>
@@ -322,22 +322,12 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             <div className="top-0 flex flex-col gap-16 py-40 md:sticky md:gap-20 md:py-80">
               <h3 className="h1">GOTS CAMPAIGN</h3>
               <p className="h5 max-w-478 whitespace-pre-wrap normal-case">
-                The <strong>#Behindtheseams</strong> educational campaign reached over 70 million unique individuals and generated over 151 million impressions.{' '}
+                The <strong>#Behindtheseams</strong> educational campaign reached over 144 million unique individuals and generated over 290 million impressions.
               </p>
             </div>
           </div>
           {/* col 2*/}
           <div className="flex min-h-[calc(3_*_var(--vh))] flex-1 shrink-0 flex-col max-md:gap-40 md:min-h-[400lvh] md:w-1/2">
-            {/* Year 2023 */}
-            <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
-              <div className="flex flex-col gap-16 md:gap-20">
-                <p className="h2 text-spanish-gray">Year 2023</p>
-                <div className="text-accent fp-text-hero">
-                  21<small className="text-[0.6em]">M</small>
-                </div>
-                <p className="text-accent h3">Unique individuals reached</p>
-              </div>
-            </div>
             {/* Year 2024 */}
             <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
               <div className="flex flex-col gap-16 md:gap-20">
@@ -348,14 +338,14 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
                 <p className="text-accent h3">Unique individuals reached</p>
               </div>
             </div>
-            {/* Year 2023 */}
+            {/* Year 2025 */}
             <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
               <div className="flex flex-col gap-16 md:gap-20">
-                <p className="h2 text-spanish-gray">Year 2023</p>
+                <p className="h2 text-spanish-gray">Year 2025</p>
                 <div className="text-accent fp-text-hero">
-                  40<small className="text-[0.6em]">M</small>
+                  144<small className="text-[0.6em]">M</small>
                 </div>
-                <p className="text-accent h3">Impressions</p>
+                <p className="text-accent h3">Unique individuals reached</p>
               </div>
             </div>
             {/* Year 2024 */}
@@ -364,6 +354,16 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
                 <p className="h2 text-spanish-gray">Year 2024</p>
                 <div className="text-accent fp-text-hero">
                   150<small className="text-[0.6em]">M</small>
+                </div>
+                <p className="text-accent h3">Impressions</p>
+              </div>
+            </div>
+            {/* Year 2025 */}
+            <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
+              <div className="flex flex-col gap-16 md:gap-20">
+                <p className="h2 text-spanish-gray">Year 2025</p>
+                <div className="text-accent fp-text-hero">
+                  290<small className="text-[0.6em]">M</small>
                 </div>
                 <p className="text-accent h3">Impressions</p>
               </div>
