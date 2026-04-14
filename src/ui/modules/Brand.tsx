@@ -6,6 +6,7 @@ import moduleProps from '@/lib/moduleProps'
 import { Any } from 'next-sanity'
 import HighlightedList from '@/ui/modules/RichtextModule/HighlightedList'
 import Blockquote from '@/ui/modules/RichtextModule/Blockquote'
+import Image from '@/ui/modules/RichtextModule/Image'
 
 interface BrandProps {
   title?: string
@@ -47,6 +48,7 @@ const Brand: FC<BrandProps> = ({ title, content, assets, imagePosition = 'right'
                     types: {
                       highlightedList: HighlightedList,
                       blockquote: Blockquote,
+                      image: Image,
                     },
                   }}
                 />

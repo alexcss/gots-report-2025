@@ -8,12 +8,14 @@ export default function HeroSaaS({
   content,
   assets,
   textWidth = 'normal',
+  textPosition = 'top-left',
   ...props
 }: Partial<{
   pretitle: string
   content: any
   assets: Sanity.Img[]
   textWidth: 'normal' | 'wide' | undefined
+  textPosition: 'top-left' | 'bottom-right' | undefined
 }> &
   Sanity.Module) {
   const asset = assets?.[0]
@@ -42,7 +44,7 @@ export default function HeroSaaS({
         })()}
       </div>
       <div className="lg:absolute lg:inset-0 lg:z-10">
-        <div className="fp-container relative z-10 pb-20 md:pb-32 lg:py-32 xl:py-80">
+        <div className={cn('fp-container lg:h-full flex flex-col relative z-10 pb-20 md:pb-32 lg:py-32 xl:py-80', textPosition === 'bottom-right' ? 'lg:justify-end lg:items-end' : 'lg:justify-start')}>
           <div className={cn('-mt-128 flex flex-col gap-20 bg-white p-20 md:p-32 lg:mt-0 xl:gap-40 xl:p-60', textWidth === 'wide' ? 'lg:w-620' : 'lg:w-350 xl:w-412')}>
             {pretitle && <h2 className="h2">{pretitle}</h2>}
             {content && (

@@ -392,7 +392,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
           <div className="grid grid-cols-1 gap-20 pt-40 pb-20 md:grid-cols-2 md:py-80">
             {features.map((feature) => (
               <div key={feature._key} className="border-accent flex flex-col gap-20 border border-dashed p-16 md:gap-40 md:p-20 xl:p-40">
-                {feature.icon && <ResponsiveImg img={feature.icon} width={80} height={80} className="h-60 w-60 object-contain md:h-80 md:w-80" />}
+                {feature.icon && <ResponsiveImg img={feature.icon} width={80} height={80} className="h-60 w-auto object-contain md:h-80" />}
                 <div className="flex flex-col gap-16 md:gap-20">
                   <h3 className="fp-text-name">{feature.title}</h3>
                   <p className="h5 normal-case">{feature.description}</p>

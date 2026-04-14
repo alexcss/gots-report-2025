@@ -40,6 +40,20 @@ export default defineType({
       group: 'options',
     }),
     defineField({
+      name: 'textPosition',
+      title: 'Text Position',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Top Left', value: 'top-left' },
+          { title: 'Bottom Right', value: 'bottom-right' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'top-left',
+      group: 'options',
+    }),
+    defineField({
       name: 'assets',
       title: 'Assets',
       type: 'array',
