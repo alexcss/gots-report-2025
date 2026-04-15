@@ -8,6 +8,7 @@ import moduleProps from '@/lib/moduleProps'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { PortableText } from 'next-sanity'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -16,9 +17,32 @@ interface MainStatisticType {
   label: string
   description?: string
   growthPercentage?: string
-  previousYearNumber?: string
   currentYear?: string
   previousYear?: string
+}
+
+interface GlobalPresenceType {
+  countries: MetricType
+  certificationBodies: MetricType
+}
+
+interface MetricType {
+  value: string
+  label: string
+  description?: string
+}
+
+interface ImpactMetricsType {
+  title?: string
+  description?: any
+  stats?: StatsType[]
+}
+
+interface StatsType {
+  period?: string
+  value?: string
+  unit?: string
+  metric?: string
 }
 
 interface FeatureType {
@@ -32,10 +56,12 @@ interface HighlightsProps {
   title?: string
   year?: string
   mainStatistic?: MainStatisticType
+  globalPresence?: GlobalPresenceType
+  impactMetrics?: ImpactMetricsType
   features?: FeatureType[]
 }
 
-const Highlights = ({ title, year, mainStatistic, features = [], ...props }: HighlightsProps) => {
+const Highlights = ({ title, year, mainStatistic, globalPresence, impactMetrics, features = [], ...props }: HighlightsProps) => {
   if (!mainStatistic && features.length === 0) return null
 
   // Refs for the elements we want to animate
@@ -123,7 +149,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             innerText: 0,
           },
           {
-            innerText: 87,
+            innerText: globalPresence?.countries?.value || 0,
             duration: 1,
             ease: 'power3.inOut',
             snap: { innerText: 1 },
@@ -154,7 +180,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
             innerText: 0,
           },
           {
-            innerText: 26,
+            innerText: globalPresence?.certificationBodies?.value || 0,
             duration: 1,
             ease: 'power3.inOut',
             snap: { innerText: 1 },
@@ -175,6 +201,22 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
 
   const sectionRef = useRef<HTMLElement>(null)
   const [vH, setVH] = useState('100svh')
+
+  const hasCountries =
+    globalPresence?.countries?.value ||
+    globalPresence?.countries?.label
+
+  const hasCertificationBodies =
+    globalPresence?.certificationBodies?.value ||
+    globalPresence?.certificationBodies?.label
+
+  const hasGlobalPresence =
+    hasCountries || hasCertificationBodies
+
+  const impactStats = impactMetrics?.stats ?? []
+  const hasImpactMetricsContent = Boolean(
+    impactMetrics?.title || impactMetrics?.description || impactStats.length > 0
+  )
 
   useEffect(() => {
     if (!window) return
@@ -217,7 +259,7 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
 
             {/* Right side - Description and chart */}
             <div className="flex flex-col items-end justify-end" data-years-wrap>
-              {(mainStatistic.growthPercentage || mainStatistic.previousYearNumber) && (
+              {(mainStatistic.growthPercentage) && (
                 <div className="flex items-end gap-2 md:gap-12">
                   {/* Previous year bar */}
                   <div className="relative flex flex-col items-center">
@@ -269,122 +311,153 @@ const Highlights = ({ title, year, mainStatistic, features = [], ...props }: Hig
         </section>
       )}
 
-      <section className="border-accent relative flex min-h-(--vh) border-t-10 py-40 md:h-lvh md:min-h-600 md:py-80">
-        <div className="fp-container flex w-full flex-col items-stretch gap-40 md:flex-row lg:gap-40">
-          {/* col 1*/}
-          <div className="relative flex flex-col gap-20 md:flex-1 md:gap-64 md:pr-20 xl:pr-80">
-            <div className="flex flex-col gap-16 md:gap-20">
-              <div data-countries-num className="text-accent fp-text-hero">
-                87
-              </div>
-              <p data-countries-label className="text-accent h3">
-                Countries
-              </p>
-            </div>
-            <div data-countries-label className="bg-bright-gray h-1 w-full"></div>
-            <p data-countries-label className="h4 whitespace-pre-wrap">
-              Certified Entities are located
-              <br />
-              in 87 countries.
-            </p>
-          </div>
-          {/* col 2*/}
-          <div className="relative flex flex-col gap-20 md:flex-1 md:gap-64 md:self-end md:pl-20 xl:pl-80">
-            <div className="flex flex-col gap-16 md:gap-20">
-              <div data-bodies-num className="text-accent fp-text-hero">
-                26
-              </div>
-              <p data-bodies-label className="text-accent h3">
-                GOTS Certification Bodies
-              </p>
-            </div>
-            <div data-bodies-label className="bg-bright-gray h-1 w-full"></div>
-            <p data-bodies-label className="h4 whitespace-pre-wrap">
-              26 approved Certification Bodies are active globally.
-            </p>
-          </div>
-        </div>
-        <button
-          className="text-spanish-gray lg:hover:text-accent pointer-events-none absolute right-1/2 bottom-0 z-20 flex h-80 w-80 translate-x-1/2 items-center justify-center xl:h-80 xl:w-80"
-          aria-label="Scroll down"
-        >
-          <svg className="animate-bounce [animation-duration:2s]" width="12" height="41" viewBox="0 0 12 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.47 40.53c.3.3.77.3 1.06 0l4.77-4.77a.75.75 0 0 0-1.06-1.06L6 38.94 1.76 34.7A.75.75 0 1 0 .7 35.76l4.77 4.77ZM5.25 0v40h1.5V0h-1.5Z" fill="currentColor" />
-          </svg>
-        </button>
-      </section>
-
-      <section className="relative">
-        <div className="fp-container flex w-full flex-col items-stretch gap-40 md:flex-row lg:gap-40">
-          {/* col 1*/}
-
-          <div className="sticky top-0 z-10 flex shrink-0 flex-col gap-20 bg-gradient-to-b from-white from-80% to-transparent to-100% pb-40 md:relative md:w-1/2 md:flex-1 md:gap-64 md:bg-transparent md:pr-20 md:pb-0 xl:pr-80">
-            <div className="top-0 flex flex-col gap-16 py-40 md:sticky md:gap-20 md:py-80">
-              <h3 className="h1">GOTS CAMPAIGN</h3>
-              <p className="h5 max-w-478 whitespace-pre-wrap normal-case">
-                The <strong>#Behindtheseams</strong> educational campaign reached over 70 million unique individuals and generated over 151 million impressions.{' '}
-              </p>
-            </div>
-          </div>
-          {/* col 2*/}
-          <div className="flex min-h-[calc(3_*_var(--vh))] flex-1 shrink-0 flex-col max-md:gap-40 md:min-h-[400lvh] md:w-1/2">
-            {/* Year 2023 */}
-            <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
-              <div className="flex flex-col gap-16 md:gap-20">
-                <p className="h2 text-spanish-gray">Year 2023</p>
-                <div className="text-accent fp-text-hero">
-                  21<small className="text-[0.6em]">M</small>
+      {hasGlobalPresence && (
+        <section className="border-accent relative flex min-h-(--vh) border-t-10 py-40 md:h-lvh md:min-h-600 md:py-80">
+          <div className="fp-container flex w-full flex-col items-stretch gap-40 md:flex-row lg:gap-40">
+            {/* col 1*/}
+            {hasCountries && (
+              <div className="relative flex flex-col gap-20 md:flex-1 md:gap-64 md:pr-20 xl:pr-80">
+                <div className="flex flex-col gap-16 md:gap-20">
+                  {globalPresence?.countries?.value && (
+                    <div data-countries-num className="text-accent fp-text-hero">
+                      {globalPresence?.countries?.value}
+                    </div>
+                  )}
+                  {globalPresence?.countries?.label && (
+                    <p data-countries-label className="text-accent h3">
+                      {globalPresence?.countries?.label}
+                    </p>
+                  )}
                 </div>
-                <p className="text-accent h3">Unique individuals reached</p>
+                {globalPresence?.countries?.description && (
+                  <>
+                    <div data-countries-label className="bg-bright-gray h-1 w-full"></div>
+                    <p data-countries-label className="h4 whitespace-pre-wrap">
+                      {globalPresence?.countries?.description}
+                    </p>
+                  </>
+                )}
               </div>
-            </div>
-            {/* Year 2024 */}
-            <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
-              <div className="flex flex-col gap-16 md:gap-20">
-                <p className="h2 text-spanish-gray">Year 2024</p>
-                <div className="text-accent fp-text-hero">
-                  70<small className="text-[0.6em]">M</small>
+            )}
+            {/* col 2*/}
+            {hasCertificationBodies && (
+              <div className="relative flex flex-col gap-20 md:flex-1 md:gap-64 md:self-end md:pl-20 xl:pl-80">
+                <div className="flex flex-col gap-16 md:gap-20">
+                  {globalPresence?.certificationBodies?.value && (
+                    <div data-bodies-num className="text-accent fp-text-hero">
+                      {globalPresence.certificationBodies.value}
+                    </div>
+                  )}
+                  {globalPresence?.certificationBodies?.label && (
+                    <p data-bodies-label className="text-accent h3">
+                      {globalPresence.certificationBodies.label}
+                    </p>
+                  )}
                 </div>
-                <p className="text-accent h3">Unique individuals reached</p>
+                {globalPresence?.certificationBodies?.description && (
+                  <>
+                    <div data-bodies-label className="bg-bright-gray h-1 w-full"></div>
+                    <p data-bodies-label className="h4 whitespace-pre-wrap">
+                      {globalPresence.certificationBodies.description}
+                    </p>
+                  </>
+                )}
               </div>
-            </div>
-            {/* Year 2023 */}
-            <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
-              <div className="flex flex-col gap-16 md:gap-20">
-                <p className="h2 text-spanish-gray">Year 2023</p>
-                <div className="text-accent fp-text-hero">
-                  40<small className="text-[0.6em]">M</small>
-                </div>
-                <p className="text-accent h3">Impressions</p>
-              </div>
-            </div>
-            {/* Year 2024 */}
-            <div className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80">
-              <div className="flex flex-col gap-16 md:gap-20">
-                <p className="h2 text-spanish-gray">Year 2024</p>
-                <div className="text-accent fp-text-hero">
-                  150<small className="text-[0.6em]">M</small>
-                </div>
-                <p className="text-accent h3">Impressions</p>
-              </div>
-            </div>
+            )}
           </div>
-        </div>
-        <div className="pointer-events-none absolute top-0 left-0 z-10 flex h-full w-full flex-col items-center justify-between">
-          <div className="border-accent sticky top-0 mb-200 w-full border-t-10 md:mb-350"></div>
           <button
-            className="text-spanish-gray lg:hover:text-accent pointer-events-none sticky bottom-0 z-20 mt-[70vh] flex h-80 w-80 items-center justify-center xl:h-80 xl:w-80"
+            className="text-spanish-gray lg:hover:text-accent pointer-events-none absolute right-1/2 bottom-0 z-20 flex h-80 w-80 translate-x-1/2 items-center justify-center xl:h-80 xl:w-80"
             aria-label="Scroll down"
           >
             <svg className="animate-bounce [animation-duration:2s]" width="12" height="41" viewBox="0 0 12 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M5.47 40.53c.3.3.77.3 1.06 0l4.77-4.77a.75.75 0 0 0-1.06-1.06L6 38.94 1.76 34.7A.75.75 0 1 0 .7 35.76l4.77 4.77ZM5.25 0v40h1.5V0h-1.5Z"
-                fill="currentColor"
-              />
+              <path d="M5.47 40.53c.3.3.77.3 1.06 0l4.77-4.77a.75.75 0 0 0-1.06-1.06L6 38.94 1.76 34.7A.75.75 0 1 0 .7 35.76l4.77 4.77ZM5.25 0v40h1.5V0h-1.5Z" fill="currentColor" />
             </svg>
           </button>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {hasImpactMetricsContent && (
+        <section className="relative">
+          <div className="fp-container flex w-full flex-col items-stretch gap-40 md:flex-row lg:gap-40">
+            {/* col 1 */}
+            {(impactMetrics?.title || impactMetrics?.description) && (
+              <div className="sticky top-0 z-10 flex shrink-0 flex-col gap-20 bg-gradient-to-b from-white from-80% to-transparent to-100% pb-40 md:relative md:w-1/2 md:flex-1 md:gap-64 md:bg-transparent md:pr-20 md:pb-0 xl:pr-80">
+                <div className="top-0 flex flex-col gap-16 py-40 md:sticky md:gap-20 md:py-80">
+
+                  {impactMetrics.title && (
+                    <h3 className="h1">{impactMetrics.title}</h3>
+                  )}
+
+                  {impactMetrics.description && (
+                    <div className="h5 max-w-478 whitespace-pre-wrap normal-case">
+                      <PortableText value={impactMetrics.description} />
+                    </div>
+                  )}
+
+                </div>
+              </div>
+            )}
+
+            {/* col 2 */}
+            {impactStats?.length > 0 && (
+              <div className="flex min-h-[calc(3_*_var(--vh))] flex-1 shrink-0 flex-col max-md:gap-40 md:min-h-[400lvh] md:w-1/2">
+
+                {impactStats.map((stat, index) => (
+                  <div
+                    key={index}
+                    className="relative flex flex-1 flex-col gap-20 py-0 md:flex-1 md:justify-end md:gap-64 md:py-80 md:pl-20 xl:pl-80"
+                  >
+                    <div className="flex flex-col gap-16 md:gap-20">
+
+                      {/* period */}
+                      {stat?.period && (
+                        <p className="h2 text-spanish-gray">
+                          {stat.period}
+                        </p>
+                      )}
+
+                      {/* value + unit */}
+                      {stat?.value && (
+                        <div className="text-accent fp-text-hero">
+                          {stat.value}
+                          {stat.unit && (
+                            <small className="text-[0.6em] uppercase">
+                              {stat.unit}
+                            </small>
+                          )}
+                        </div>
+                      )}
+                      {/* metric */}
+                      {stat?.metric && (
+                        <p className="text-accent h3">
+                          {stat.metric}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* divider + scroll button */}
+          <div className="pointer-events-none absolute top-0 left-0 z-10 flex h-full w-full flex-col items-center justify-between">
+            <div className="border-accent sticky top-0 mb-200 w-full border-t-10 md:mb-350"></div>
+
+            <button
+              className="text-spanish-gray lg:hover:text-accent pointer-events-none sticky bottom-0 z-20 mt-[70vh] flex h-80 w-80 items-center justify-center xl:h-80 xl:w-80"
+              aria-label="Scroll down"
+            >
+              <svg className="animate-bounce [animation-duration:2s]" width="12" height="41" viewBox="0 0 12 41" fill="none">
+                <path
+                  d="M5.47 40.53c.3.3.77.3 1.06 0l4.77-4.77a.75.75 0 0 0-1.06-1.06L6 38.94 1.76 34.7A.75.75 0 1 0 .7 35.76l4.77 4.77ZM5.25 0v40h1.5V0h-1.5Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+          </div>
+        </section>
+      )}
 
       {/* Feature boxes */}
       {features.length > 0 && (

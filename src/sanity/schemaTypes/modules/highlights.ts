@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import { IoStatsChartOutline } from 'react-icons/io5'
 
 export default defineType({
@@ -61,11 +61,10 @@ export default defineType({
           validation: (Rule) => Rule.max(20),
         }),
         defineField({
-          name: 'previousYearNumber',
-          title: 'Previous Year Number',
+          name: 'previousYear',
+          title: 'Previous Year',
           type: 'string',
-          description: 'The number from the previous year',
-          validation: (Rule) => Rule.max(50),
+          validation: (Rule) => Rule.max(10),
         }),
         defineField({
           name: 'currentYear',
@@ -73,14 +72,144 @@ export default defineType({
           type: 'string',
           validation: (Rule) => Rule.max(10),
         }),
+      ],
+    }),
+    defineField({
+      name: 'globalPresence',
+      title: 'Global Presence',
+      type: 'object',
+      group: 'content',
+      fields: [
         defineField({
-          name: 'previousYear',
-          title: 'Previous Year',
-          type: 'string',
-          validation: (Rule) => Rule.max(10),
+          name: 'countries',
+          title: 'Countries',
+          type: 'object',
+          options: {
+            collapsible: false,
+          },
+          fields: [
+            defineField({
+              name: 'value',
+              title: 'Value',
+              type: 'string',
+              validation: (Rule) => Rule.required().max(5),
+            }),
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              validation: (Rule) => Rule.required().max(50)
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+              validation: (Rule) => Rule.max(200),
+            }),
+          ],
+        }),
+        defineField({
+          name: 'certificationBodies',
+          title: 'Certification Bodies',
+          type: 'object',
+          options: {
+            collapsible: false,
+          },
+          fields: [
+            defineField({
+              name: 'value',
+              title: 'Value',
+              type: 'string',
+              validation: (Rule) => Rule.required().max(5),
+            }),
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              validation: (Rule) => Rule.required().max(50)
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+              validation: (Rule) => Rule.max(200),
+            }),
+          ],
         }),
       ],
     }),
+      defineField({
+        name: 'impactMetrics',
+        title: 'Impact Metrics',
+        type: 'object',
+        group: 'content',
+        fields: [
+          defineField({
+            name: 'title',
+            title: 'Title',
+            type: 'string',
+          }),
+          defineField({
+            name: 'description',
+            title: 'Description',
+            type: 'array',
+            of: [
+              defineArrayMember({
+                type: 'block',
+                styles: [{ title: 'Normal', value: 'normal' }],
+                lists: [],
+                marks: {
+                  decorators: [{ title: 'Bold', value: 'strong' }],
+                  annotations: [],
+                },
+              }),
+            ],
+          }),
+          defineField({
+            name: 'stats',
+            title: 'Stats',
+            type: 'array',
+            of: [
+              {
+                type: 'object',
+                fields: [
+                  defineField({
+                    name: 'period',
+                    title: 'Period',
+                    type: 'string',
+                  }),
+                  defineField({
+                    name: 'value',
+                    title: 'Value',
+                    type: 'string',
+                  }),
+                  defineField({
+                    name: 'unit',
+                    title: 'Unit',
+                    type: 'string',
+                  }),
+                  defineField({
+                    name: 'metric',
+                    title: 'Metric',
+                    type: 'string',
+                  }),
+                ],
+                preview: {
+                  select: {
+                    period: 'period',
+                    metric: 'metric',
+                  },
+                  prepare: ({ period, metric }) => ({
+                    title: `${period} - ${metric}`,
+                  }),
+                },
+              },
+            ],
+          }),
+        ],
+      }),
     defineField({
       name: 'features',
       title: 'Feature Boxes',
