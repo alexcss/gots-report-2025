@@ -24,6 +24,8 @@
     --color-lime-green: #C0EF92;
     --color-lime: #81C200;
     --color-beige: #F3EBE3;
+    --color-light-yellow: #FBD9B8;
+    --color-coral: #F07059;
     --header-height: 60px;
     --max-height-fold: calc(100svh - var(--header-height));
 

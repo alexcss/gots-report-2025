@@ -19,10 +19,50 @@ export const resourceItem = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Download file', value: 'file' },
+          { title: 'External link', value: 'link' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'file',
+    }),
+
+    defineField({
       name: 'file',
       title: 'File',
       type: 'file',
-      validation: (Rule) => Rule.required(),
+      hidden: ({ parent }) => (parent as any)?.type !== 'file',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as any
+
+          if (parent?.type === 'file' && !value) {
+            return 'File is required'
+          }
+
+          return true
+        }),
+    }),
+
+    defineField({
+      name: 'url',
+      title: 'URL',
+      type: 'url',
+      hidden: ({ parent }) => (parent as any)?.type !== 'link',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as any
+
+          if (parent?.type === 'link' && !value) {
+            return 'URL is required'
+          }
+
+          return true
+        }),
     }),
   ],
 })

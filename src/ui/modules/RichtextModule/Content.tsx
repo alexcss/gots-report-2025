@@ -16,6 +16,7 @@ import EmailCta from '@/ui/modules/RichtextModule/EmailCta'
 import People from '@/ui/modules/RichtextModule/People'
 import YouTube from '@/ui/modules/RichtextModule/YouTube'
 import TwoColImage from '@/ui/modules/RichtextModule/TwoColImage'
+import HighlightedListTwoColumn from '@/ui/modules/RichtextModule/HighlightedListTwoColumn'
 
 export default function Content({ value, className, children }: { value: Any } & React.ComponentProps<'div'>) {
   return (
@@ -31,6 +32,7 @@ export default function Content({ value, className, children }: { value: Any } &
             twoColImage: TwoColImage,
             admonition: Admonition,
             highlightedList: HighlightedList,
+            highlightedListTwoColumn: HighlightedListTwoColumn,
             blockquote: Blockquote,
             code: Code,
             statistics: Statistics,
