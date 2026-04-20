@@ -45,6 +45,7 @@ export default defineField({
     { type: 'organisation' },
     { type: 'staff-profiles' },
     { type: 'map' },
+    { type: 'journey' },
   ],
   options: {
     insertMenu: {

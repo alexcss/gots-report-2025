@@ -111,6 +111,28 @@
     & > :last-child {
         @apply !mb-0;
     }
+
+    &.card {
+        & > :first-child {
+            @apply !mb-16 lg:!mb-24;
+        }
+        & > :last-child {
+            @apply !mb-0;
+        }
+
+        h2 {
+            @apply text-22 lg:text-26 font-normal leading-[1.1] lg:leading-[1.2] uppercase;
+        }
+    }
+}
+
+@utility richtext-coral {
+    & ul {
+        @apply md:space-y-20;
+        & li {
+            @apply before:bg-[url(/li-marker-coral.svg)];
+        }
+    }
 }
 
 @utility richtext-dark {

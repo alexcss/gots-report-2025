@@ -35,6 +35,7 @@ import BehindTheSeams from '@/ui/modules/BehindTheSeams'
 import Organisation from '@/ui/modules/Organisation'
 import Highlights from './Highlights'
 import Map from './Map'
+import Journey from '@/ui/modules/Journey'
 
 import dynamic from 'next/dynamic'
 import { createDataAttribute } from 'next-sanity'
@@ -80,6 +81,7 @@ const MODULE_MAP = {
   organisation: Organisation,
   highlights: Highlights,
   map: Map,
+  journey: Journey,
 
 } as const
 

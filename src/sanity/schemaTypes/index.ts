@@ -75,6 +75,8 @@ import goals from './modules/goals'
 import behindTheSeams from './modules/behind-the-seams'
 import mediaGrid from './modules/media-grid'
 import highlights from './modules/highlights'
+import journey from './modules/journey'
+import highlightedListTwoColumn from '@/sanity/schemaTypes/fragments/highlighted-list-two-column'
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // documents
@@ -111,6 +113,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   emailCta,
   people,
   youtube,
+  highlightedListTwoColumn,
 
   // modules
   accordionList,
@@ -153,4 +156,5 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   behindTheSeams,
   mediaGrid,
   highlights,
+  journey,
 ]

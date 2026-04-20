@@ -71,7 +71,10 @@ const MediaGrid = ({ rows, displayType = 'brand', title, ...props }: MediaGridPr
           src: item?.image?.image ? urlFor(item.image.image).width(1200).url() : undefined,
           description: (
             <>
-              {item.description}{' '}
+              {item?.image?.alt && (
+                <h2 className="mb-12 font-bold text-gots-green">{item.image.alt}</h2>
+              )}
+              <p>{item.description}{' '}</p>
               <span className="fp-text-body2 mt-12 block text-center md:mt-20">
                 {index + 1} / {allItems.length}
               </span>
