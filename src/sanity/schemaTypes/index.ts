@@ -33,6 +33,7 @@ import organisationInfo from './fragments/organisation-info'
 import emailCta from './fragments/email-cta'
 import people from './fragments/people'
 import youtube from './fragments/youtube'
+import inLovingMemory from './fragments/in-loving-memory'
 
 // modules
 import accordionList from './modules/accordion-list'
@@ -114,6 +115,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   people,
   youtube,
   highlightedListTwoColumn,
+  inLovingMemory,
 
   // modules
   accordionList,

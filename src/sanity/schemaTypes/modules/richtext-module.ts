@@ -33,6 +33,7 @@ export default defineType({
         { type: 'emailCta' },
         { type: 'people' },
         { type: 'youtube' },
+        { type: 'in-loving-memory' },
         // defineArrayMember({
         //   title: 'Code block',
         //   type: 'code',
