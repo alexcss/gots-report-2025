@@ -17,6 +17,7 @@ import People from '@/ui/modules/RichtextModule/People'
 import YouTube from '@/ui/modules/RichtextModule/YouTube'
 import TwoColImage from '@/ui/modules/RichtextModule/TwoColImage'
 import HighlightedListTwoColumn from '@/ui/modules/RichtextModule/HighlightedListTwoColumn'
+import InLovingMemory from '@/ui/modules/RichtextModule/InLovingMemory'
 
 export default function Content({ value, className, children }: { value: Any } & React.ComponentProps<'div'>) {
   return (
@@ -42,6 +43,7 @@ export default function Content({ value, className, children }: { value: Any } &
             emailCta: EmailCta,
             people: People,
             youtube: YouTube,
+            'in-loving-memory': InLovingMemory,
             'custom-html': ({ value }) => <CustomHTML className="has-[table]:md:[grid-column:bleed] has-[table]:md:mx-auto" {...value} />,
           },
         }}
